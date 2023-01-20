@@ -3,7 +3,7 @@
 ## Running Postgres with Docker
 
 ### Instructions
-
+install all required python libraries from [requirement.txt](https://github.com/heaven-devoror/Data-Eng-Zoomcamp/tree/main/week_1_setup/docker_sql)
 
 > Note: Run Docker desktop before running this code locally
 Running postgres on windows git bash

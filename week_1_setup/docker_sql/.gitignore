@@ -1,2 +1,4 @@
 #Ignore all files in this path
 /ny_taxi_postgres_data
+#Ignor all csv files
+*.csv
