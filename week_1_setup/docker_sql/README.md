@@ -2,6 +2,9 @@
 
 ## Running Postgres with Docker
 
+### Instructions
+
+
 > Note: Run Docker desktop before running this code locally
 Running postgres on windows git bash
 
