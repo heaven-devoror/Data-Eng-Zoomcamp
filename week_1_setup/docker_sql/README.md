@@ -57,11 +57,74 @@ winpty docker run -it \
 ```
 Run pgADMIN
 ```bash
-docker run -it \
+winpty docker run -it \
   -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
   -e PGADMIN_DEFAULT_PASSWORD="root" \
   -p 8080:80 \
   --network=pg-network \
   --name pgadmin-2 \
   dpage/pgadmin4
+```
+
+Data Ingestion
+```bash
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+
+python ingest_data2.py \
+  --user=root \
+  --password=root \
+  --host=localhost \
+  --port=5432 \
+  --db=ny_taxi \
+  --table_name=yellow_taxi_trips \
+  --url=${URL}
+```
+# Build the image
+```bash
+docker build -t taxi_ingest:v001 .
+```
+
+Running the script with docker
+```bash
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+
+docker run -it \
+  --network=pg-network \
+  taxi_ingest:v001 \
+    --user=root \
+    --password=root \
+    --host=pg-database \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name=yellow_taxi_trips \
+    --url=${URL}
+```
+# Ingesting Locally
+```bash
+URL="http://localhost:8000/yellow_tripdata_2021-01.csv"
+
+docker run -it \
+  --network=pg-network \
+  taxi_ingest:v001 \
+    --user=root \
+    --password=root \
+    --host=pg-database \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name=yellow_taxi_trips \
+    --url=${URL}
+```
+
+# Docker Compose
+Run
+```bash
+docker-compose up
+```
+Run in detach mode
+```bash
+docker-compose up -d
+```
+Shutting Down
+```bash
+docker-compose down
 ```
