@@ -82,7 +82,7 @@ Sending tables data to ny_taxi database
 > Sending data in chunks will be optimal
 ```bash
 df.to_sql(name='green_taxi_data', con=engine, if_exists='replace')
-df.to_sql(name='green_taxi_location', con=engine, if_exists='replace')
+df2.to_sql(name='green_taxi_location', con=engine, if_exists='replace')
 ```
 
 # Checking files in postgres
@@ -161,7 +161,7 @@ SELECT COUNT(1) FROM green_taxi_data
 WHERE DATE(lpep_pickup_datetime) = '2019-01-15'
 ```
 
-Answer `20689`
+Answer <pre>`20689`</pre>
 
 Question 4
 ```bash
@@ -170,10 +170,10 @@ ORDER BY trip_distance DESC
 LIMIT 1
 
 date              trip_distance
-"2019-01-15"	117.99
+"2019-01-15"	  117.99
 ```
 
-Answer `2019-01-15`
+Answer <pre>`2019-01-15`</pre>
 
 
 Question 5
@@ -187,3 +187,21 @@ passenger_count     count
 2	              1282
 3	              254
 ```
+
+Answer <pre>`2: 1282 ; 3: 254`</pre>
+
+Question 6
+```bash
+SELECT gtl2."Zone" As Final_Zone
+FROM green_taxi_data AS gtd
+LEFT JOIN green_taxi_location AS gtl ON gtd."PULocationID" = gtl."LocationID"
+LEFT JOIN green_taxi_location AS gtl2 ON gtd."DOLocationID" = gtl2."LocationID"
+WHERE gtl."Zone" = 'Astoria'
+ORDER BY tip_amount DESC
+LIMIT 1
+
+final_zone
+"Long Island City/Queens Plaza"
+```
+
+Answer <pre>`Long Island City/Queens Plaza`</pre>
