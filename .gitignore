@@ -1,2 +1,4 @@
 #Ignore .gz files
 *.gz
+#Ignore Folders
+week_2_flow/ny_taxi_postgres_data/
