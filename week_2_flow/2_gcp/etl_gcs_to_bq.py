@@ -47,4 +47,5 @@ def etl_web_to_gcs() -> None:
     write_bq(df)
 
 if __name__ == "__main__":
-    etl_web_to_gcs() 
+    
+    etl_web_to_gcs()

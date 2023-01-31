@@ -1,4 +1,7 @@
 #Ignore .gz files
 *.gz
+*.parquet
 #Ignore Folders
 week_2_flow/ny_taxi_postgres_data/
+#Specific files
+del_python_test.py

@@ -5,29 +5,22 @@ from prefect_gcp.cloud_storage import GcsBucket
 from random import randint
 import pathlib
 
-@task(retries=3)
+@task()
 def fetch(dataset_url: str) -> pd.DataFrame:
     """Read taxi data from web into pandas DataFrame"""
-    # if randint(0, 1) > 0:
-    #     raise Exception
-
     df = pd.read_csv(dataset_url)
     return df
 
 @task(log_prints=True)
-def clean(df = pd.DataFrame) -> pd.DataFrame:
-    """Fix dtype issues"""
-    df['tpep_pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'])
-    df['tpep_dropoff_datetime'] = pd.to_datetime(df['tpep_dropoff_datetime'])
-    print(df.head(2))
-    print(f"columns: {df.dtypes}")
-    print(f"rows: {len(df)}")
-    return df
+def row_record(df: pd.DataFrame) -> None:
+    """Show number of rows in datafile"""
+    print(f"Number of rows: {len(df.index)}")
+
 
 @task()
 def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     """"Write this dataframe to a parquet file"""
-    loc = Path.home() / 'Data-Eng-Zoomcamp' / 'week_2_flow' / '2_gcp' / 'data' / f"{color}"
+    loc = Path.home() / 'Data-Eng-Zoomcamp' / 'week_2_flow' / 'homework' / 'data' / f"{color}"
     try:
         loc.mkdir(parents=True, exist_ok=False)
     except FileExistsError:
@@ -52,15 +45,15 @@ def write_gcs(path: Path, color: str, dataset_file: str) -> None:
 @flow
 def etl_web_to_gcs() -> None:
     """Main ETL Function"""
-    color = "yellow"
-    year = 2021
+    color = "green"
+    year = 2020
     month = 1
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
     df = fetch(dataset_url)
-    df_clean = clean(df)
-    path = write_local(df_clean, color, dataset_file)
+    row_record(df)
+    path = write_local(df, color, dataset_file)
     write_gcs(path, color, dataset_file)
 
 if __name__ == '__main__':
