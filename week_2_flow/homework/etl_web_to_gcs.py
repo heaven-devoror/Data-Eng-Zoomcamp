@@ -4,6 +4,9 @@ from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
 from random import randint
 import pathlib
+from prefect.orion.schemas.schedules import CronSchedule
+from prefect.deployments import Deployment
+
 
 @task()
 def fetch(dataset_url: str) -> pd.DataFrame:
@@ -51,10 +54,18 @@ def etl_web_to_gcs() -> None:
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
+    cron_dep = Deployment.build_from_flow(
+            flow= etl_web_to_gcs,
+            name = "cron",
+            schedule = (CronSchedule(cron="0 5 1 * *"))
+        )
+    cron_dep.apply()
+
     df = fetch(dataset_url)
     row_record(df)
     path = write_local(df, color, dataset_file)
     write_gcs(path, color, dataset_file)
+
 
 if __name__ == '__main__':
     etl_web_to_gcs()

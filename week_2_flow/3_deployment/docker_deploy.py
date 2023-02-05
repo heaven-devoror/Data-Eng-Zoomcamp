@@ -1,5 +1,5 @@
 from prefect.deployments import Deployment
-from parameterized_flow import etl_parent_flow
+from parameterized_flow2 import etl_parent_flow
 from prefect.infrastructure.docker import DockerContainer
 
 docker_block = DockerContainer.load("zoom")

@@ -38,16 +38,7 @@ def clean(df = pd.DataFrame) -> pd.DataFrame:
 @task()
 def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     """"Write this dataframe to a parquet file"""
-    loc = Path.home() / 'Data-Eng-Zoomcamp' / 'week_2_flow' / '2_gcp' / 'data' / f"{color}"
-    try:
-        loc.mkdir(parents=True, exist_ok=False)
-    except FileExistsError:
-        print("Folder is already there")
-    else:
-        print("Folder was created")
-    # path = Path(f"data/{color}/{dataset_file}.parquet")
-    file_name = f"{dataset_file}.parquet"
-    path = Path(loc / file_name)
+    path = Path(f"data/{color}/{dataset_file}.parquet").as_posix()
     df.to_parquet(path, compression="gzip")
     return path
 
@@ -79,6 +70,6 @@ def etl_parent_flow(months: list[int] = [1, 2], year: int = 2021, color: str = "
 
 if __name__ == '__main__':
     color = "yellow"
-    months = [2,3]
-    year = 2019
+    months = [1,2,3]
+    year = 2021
     etl_parent_flow(months, year, color)
