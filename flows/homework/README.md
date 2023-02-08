@@ -316,6 +316,39 @@ flows/homework/etl_web_to_gcs_git_hw.py:12: DtypeWarning: Columns (3) have mixed
 
 Answer <pre>88605</pre>
 
+Question 5
+
+# Updated year and month for this question
+# File remain the as Question 4
+# Update is pushed to Github
+```bash
+import pandas as pd
+from prefect import flow, task
+
+
+@task(log_prints=True)
+def fetch(dataset_url: str) -> pd.DataFrame:
+    """Read taxi data from web into pandas DataFrame"""
+    df = pd.read_csv(dataset_url)
+    """Show number of rows in datafile"""
+    print(f"Number of rows: {len(df.index)}")
+
+@flow()
+def etl_web_to_gcs() -> None:
+    """Main ETL Function"""
+    color = "green"
+    year = 2019
+    month = 4
+    dataset_file = f"{color}_tripdata_{year}-{month:02}"
+    dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
+
+    fetch(dataset_url)
+
+
+if __name__ == '__main__':
+    etl_web_to_gcs()
+```
+
 Question 6
 
 ```bash
