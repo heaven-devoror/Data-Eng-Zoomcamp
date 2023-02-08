@@ -280,7 +280,7 @@ Question 4
 # Then to blocks
 # Add Github block then add your respective repository
 
-<img alt="github block" src="">
+<img alt="github block" src="https://i.imgur.com/fIoAH6D.jpg">
 
 # Add etl_web_to_gcs_git_hw.py to github repository
 
@@ -348,6 +348,51 @@ def etl_web_to_gcs() -> None:
 if __name__ == '__main__':
     etl_web_to_gcs()
 ```
+
+# Go to app.prefect.cloud and create account
+# Created a slack webhook by connecting Temporary De Zoomcamp Prefect Notification
+# adding channel #testing-notifications
+# Test program
+
+```bash
+from prefect.blocks.notifications import SlackWebhook
+
+slack_webhook_block = SlackWebhook.load("slack-notification")
+slack_webhook_block.notify("Hello from Prefect!")
+```
+
+<img alt="slack test" src="https://i.imgur.com/inj6uQ9.jpg">
+
+# Added Github block to prefect cloud same as Question 4
+```bash
+prefect profile create notify
+prefect profile use notify
+prefect cloud login --key ************************
+
+prefect deployment build flows/homework/etl_web_to_gcs_git_hw.py:etl_web_to_gcs --name etl_github -sb github/zoom-repo -a
+prefect agent start -q 'default'
+prefect deployment run etl-web-to-gcs/etl_github
+
+Agent started! Looking for work from queue(s): default...
+19:11:01.508 | INFO    | prefect.agent - Submitting flow run 'a6768881-34a7-4dda-b4c2-41e1e69bb05f'
+19:11:03.099 | INFO    | prefect.infrastructure.process - Opening process 'skinny-loon'...
+19:11:03.479 | INFO    | prefect.agent - Completed submission of flow run 'a6768881-34a7-4dda-b4c2-41e1e69bb05f'
+/home/raviyo123/miniconda3/envs/zoom/lib/python3.9/runpy.py:127: RuntimeWarning: 'prefect.engine' found in sys.modules after import of package 'prefect', but prior to execution of 'prefect.engine'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+19:11:06.938 | INFO    | Flow run 'skinny-loon' - Downloading flow code from storage at ''
+19:11:11.069 | INFO    | Flow run 'skinny-loon' - Created task run 'fetch-ba00c645-0' for task 'fetch'
+19:11:11.070 | INFO    | Flow run 'skinny-loon' - Executing 'fetch-ba00c645-0' immediately...
+19:11:16.613 | INFO    | Task run 'fetch-ba00c645-0' - Number of rows: 514392
+19:11:17.054 | INFO    | Task run 'fetch-ba00c645-0' - Finished in state Completed()
+19:11:17.610 | INFO    | Flow run 'skinny-loon' - Finished in state Completed('All states completed.')
+19:11:18.475 | INFO    | prefect.infrastructure.process - Process 'skinny-loon' exited cleanly.
+```
+
+<img alt="notification" src="https://i.imgur.com/n4T4S5w.jpg">
+
+Answer <pre>514392</pre>
+
+
 
 Question 6
 

@@ -3,7 +3,7 @@
 ###
 name: etl_github
 description: Main ETL Function
-version: 3181626d7590c8ebf0e78be361b3055c
+version: 66aaf6e217b80923ea8af3bb7295fadf
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
