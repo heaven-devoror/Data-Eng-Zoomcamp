@@ -288,9 +288,33 @@ Question 4
 prefect agent start -q default
 
 prefect deployment build flows/homework/etl_web_to_gcs_git_hw.py:etl_web_to_gcs --name etl_github -sb github/zoom-repo -a
+Found flow 'etl-web-to-gcs'
+Deployment YAML created at '/home/raviyo123/Data-Eng-Zoomcamp/etl_web_to_gcs-deployment.yaml'.
+Deployment storage GitHub(repository='https://github.com/heaven-devoror/Data-Eng-Zoomcamp', reference=None, 
+access_token=None) does not have upload capabilities; no files uploaded.  Pass --skip-upload to suppress this 
+warning.
+Deployment 'etl-web-to-gcs/etl_github' successfully created with id '387f5626-5e55-4346-9744-7718c14a4341'.
+
+prefect deployment run etl-web-to-gcs/etl_github
+
+Agent started! Looking for work from queue(s): default...
+17:07:14.357 | INFO    | prefect.agent - Submitting flow run 'd25ea018-4a74-41e8-a137-f295d3fbd2a6'
+17:07:14.446 | INFO    | prefect.infrastructure.process - Opening process 'secret-puma'...
+17:07:14.477 | INFO    | prefect.agent - Completed submission of flow run 'd25ea018-4a74-41e8-a137-f295d3fbd2a6'
+/home/raviyo123/miniconda3/envs/zoom/lib/python3.9/runpy.py:127: RuntimeWarning: 'prefect.engine' found in sys.modules after import of package 'prefect', but prior to execution of 'prefect.engine'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+17:07:17.236 | INFO    | Flow run 'secret-puma' - Downloading flow code from storage at ''
+17:07:18.413 | INFO    | Flow run 'secret-puma' - Created task run 'fetch-ba00c645-0' for task 'fetch'
+17:07:18.414 | INFO    | Flow run 'secret-puma' - Executing 'fetch-ba00c645-0' immediately...
+flows/homework/etl_web_to_gcs_git_hw.py:12: DtypeWarning: Columns (3) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(dataset_url)
+17:07:19.919 | INFO    | Task run 'fetch-ba00c645-0' - Number of rows: 88605
+17:07:19.950 | INFO    | Task run 'fetch-ba00c645-0' - Finished in state Completed()
+17:07:19.985 | INFO    | Flow run 'secret-puma' - Finished in state Completed('All states completed.')
+17:07:20.524 | INFO    | prefect.infrastructure.process - Process 'secret-puma' exited cleanly.
 ```
 
-<img alt="github flow run" src="">
+Answer <pre>88605</pre>
 
 Question 6
 
