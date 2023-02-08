@@ -276,6 +276,21 @@ Answer <pre>14,851,920</pre>
 
 Question 4
 
+# Go to prefect orion server
+# Then to blocks
+# Add Github block then add your respective repository
+
+<img alt="github block" src="">
+
+# Add etl_web_to_gcs_git_hw.py to github repository
+
+```bash
+prefect agent start -q default
+
+prefect deployment build flows/homework/etl_web_to_gcs_git_hw.py:etl_web_to_gcs --name etl_github -sb github/zoom-repo -a
+```
+
+<img alt="github flow run" src="">
 
 Question 6
 

@@ -3,19 +3,13 @@
 ###
 name: etl_github
 description: Main ETL Function
-version: bbc819036dd86be4100b5cbcd746b09e
+version: 3181626d7590c8ebf0e78be361b3055c
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
 parameters: {}
 schedule: null
 infra_overrides: {}
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-web-to-gcs
-manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -24,11 +18,14 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
-  _block_document_id: 555c6f8b-acf1-4ac7-98b5-b4e6963f118c
-  _block_document_name: anonymous-1658f84d-9fd3-4ec2-bc6a-ca0bdfe46c90
-  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-web-to-gcs
+manifest_path: null
 storage:
   repository: https://github.com/heaven-devoror/Data-Eng-Zoomcamp
   reference: null
