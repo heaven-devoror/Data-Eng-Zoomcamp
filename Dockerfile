@@ -4,5 +4,5 @@ COPY docker-requirements.txt .
 
 RUN pip install -r docker-requirements.txt --trusted-host pypi.python.org --no-cache-dir
 
-COPY week_2_flow/3_deployment /opt/prefect/flows
+COPY flows /opt/prefect/flows
 COPY data /opt/prefect/data

@@ -275,3 +275,19 @@ After adding number of rows from both files
 Answer <pre>14,851,920</pre>
 
 Question 4
+
+
+Question 6
+
+```bash
+(base) raviyo123@de-zoomcamp:~/Data-Eng-Zoomcamp$ conda activate zoom
+(zoom) raviyo123@de-zoomcamp:~/Data-Eng-Zoomcamp$ prefect orion start
+
+Go to Blocks
+Add Secret block
+```
+<img alt="secret block creation" src="https://i.imgur.com/jggfada.jpg">
+
+<img alt="secret block created" src="https://i.imgur.com/cNlF3mK.jpg">
+
+Answer <pre>8</pre>
