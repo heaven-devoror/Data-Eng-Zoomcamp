@@ -28,11 +28,8 @@ def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     df.to_parquet(path, compression="gzip")
     return path
 
-@task()
 
-
-
-@flow
+@flow()
 def etl_web_to_gcs() -> None:
     """Main ETL Function"""
     color = "green"
