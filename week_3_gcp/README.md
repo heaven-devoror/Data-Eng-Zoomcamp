@@ -59,7 +59,7 @@ Answer <pre>647.87 MB for non-partitioned table and 23.06 MB for the partitioned
 
 # Question 6
 
-Answer <pre>Big Query</pre>
+Answer <pre>GCP Bucket</pre>
 
 # Question 7
 
