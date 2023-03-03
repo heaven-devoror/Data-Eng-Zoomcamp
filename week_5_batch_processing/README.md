@@ -7,7 +7,7 @@
 
 <img alt='spark version' src='https://i.imgur.com/fTgzYDv.png'>
 
-Answer <pre>3.3.2</pre>
+Answer <pre>3.3.1</pre>
 
 # Question 2
 
