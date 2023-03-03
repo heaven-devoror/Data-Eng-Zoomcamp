@@ -1,0 +1,6 @@
+types.StructType([
+    types.StructField('LocationID', types.IntegerType(), True), 
+    types.StructField('Borough', types.StringType(), True), 
+    types.StructField('Zone', types.StringType(), True), 
+    types.StructField('service_zone', types.StringType(), True)
+])
